@@ -1,0 +1,12 @@
+'search' :
+  controller: search
+  config:
+    styles:
+      - https://cdn.jsdelivr.net/npm/instantsearch.js@2.2.0/dist/instantsearch.min.css
+      - https://cdn.jsdelivr.net/npm/instantsearch.js@2.2.0/dist/instantsearch-theme-algolia.min.css
+      - css/search.css
+    js:
+      - https://cdn.jsdelivr.net/npm/instantsearch.js@2.2.0/dist/instantsearch.min.js
+'post/add' :
+  controller: post
+  action: add

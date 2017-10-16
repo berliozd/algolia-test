@@ -1,0 +1,53 @@
+
+<div id="search-box">
+    <!-- SearchBox widget will appear here -->
+</div>
+
+
+<div id="refinement-list">
+    <!-- RefinementList widget will appear here -->
+</div>
+<div id="hits">
+    <!-- Hits widget will appear here -->
+</div>
+
+<script>
+
+    var options = {
+        appId: '<?php echo $appId?>',
+        apiKey: '<?php echo $apiKey?>',
+        indexName: '<?php echo $indexName?>',
+        urlSync: true
+    };
+
+    const search = instantsearch(options);
+
+    // initialize RefinementList
+    search.addWidget(
+        instantsearch.widgets.refinementList({
+            container: '#refinement-list',
+            attributeName: 'category'
+        })
+    );
+
+    // initialize SearchBox
+    search.addWidget(
+        instantsearch.widgets.searchBox({
+            container: '#search-box',
+            placeholder: 'Search for products'
+        })
+    );
+
+    // initialize hits widget
+    search.addWidget(
+        instantsearch.widgets.hits({
+            container: '#hits',
+            templates: {
+                empty: 'No results',
+                item: '<a href="delete?{{objectID}}">Delete</a>: {{{_highlightResult.name.value}}}'
+            }
+        })
+    );
+
+    search.start();
+</script>
