@@ -37,15 +37,9 @@ class App
         // Get request uri
         $uri = str_replace('/', '', $_SERVER['REQUEST_URI']);
 
-        var_dump($uri);
-
         $routes = $this->ymlParser->parse(file_get_contents(ROOT . 'config/routes.yml'));
 
-        var_dump($routes);
         list($controller, $action, $routeConfig) = $this->getRouteData($routes, $uri);
-
-        var_dump($controller, $action, $routeConfig);
-        exit;
 
         $controller = Constants::CONTROLLER_NAMESPACE_ROOT . ucfirst($controller);
 
