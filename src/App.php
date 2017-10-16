@@ -45,6 +45,7 @@ class App
         list($controller, $action, $routeConfig) = $this->getRouteData($routes, $uri);
 
         var_dump($controller, $action, $routeConfig);
+        exit;
 
         $controller = Constants::CONTROLLER_NAMESPACE_ROOT . ucfirst($controller);
 
