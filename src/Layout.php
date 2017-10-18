@@ -35,7 +35,7 @@ class Layout extends View
         }
 
 
-        $this->setVariables(['styles' => $styles, 'js' => $jss, 'content' => $viewContent]);
+        $this->setParams(['styles' => $styles, 'js' => $jss, 'content' => $viewContent]);
         $this->file = ROOT . 'layout/' . $file . '.phtml';
     }
 

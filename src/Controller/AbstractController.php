@@ -9,8 +9,7 @@
 namespace AlgoliaTest\Controller;
 
 
-use AlgoliaTest\Layout;
-use AlgoliaTest\View;
+use AlgoliaTest\App;
 
 abstract class AbstractController
 {
@@ -19,28 +18,11 @@ abstract class AbstractController
 
     /**
      * AbstractController constructor.
-     * @param $app
+     * @param App $app
      */
     function __construct($app)
     {
         $this->app = $app;
-    }
-
-    /**
-     * @param $routeConfig
-     * @param null $variables
-     */
-    public function render($routeConfig = null, $variables = null)
-    {
-        $view = new View($this->getApp()->getController(), $this->getApp()->getAction());
-        if ($variables) {
-            $view->setVariables($variables);
-        }
-        $viewContent = $view->output();
-
-        $layout = new Layout($routeConfig, $viewContent);
-
-        echo $layout->output();
     }
 
     /**

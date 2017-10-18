@@ -7,19 +7,22 @@
  * Time: 22:43
  */
 
-namespace AlgoliaTest\Controller;
+namespace AlgoliaTest\Controller\Page;
 
-class NotFound extends AbstractController
+use AlgoliaTest\Controller\PageController;
+
+
+class NotFound extends PageController
 {
 
     function __construct($app)
     {
-       parent::__construct($app);
+        parent::__construct($app);
     }
 
-    public function index()
+    public function indexAction()
     {
         $this->getApp()->getLogger()->info('notfound index');
-        $this->render();
+        $this->execute();
     }
 }

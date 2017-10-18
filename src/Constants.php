@@ -12,5 +12,5 @@ namespace AlgoliaTest;
 class Constants
 {
 
-    const CONTROLLER_NAMESPACE_ROOT = 'AlgoliaTest\Controller\\';
+    const CONTROLLER_NAMESPACE_ROOT = 'AlgoliaTest\Controller';
 }

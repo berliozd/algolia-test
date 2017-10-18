@@ -7,11 +7,12 @@
  * Time: 22:43
  */
 
-namespace AlgoliaTest\Controller;
+namespace AlgoliaTest\Controller\Page;
 
 use AlgoliaTest\App;
+use AlgoliaTest\Controller\PageController;
 
-class Search extends AbstractController
+class Search extends PageController
 {
 
     /**
@@ -23,11 +24,11 @@ class Search extends AbstractController
         parent::__construct($app);
     }
 
-    public function index()
+    public function indexAction()
     {
         $this->getApp()->getLogger()->info('search index');
         $config = $this->getApp()->getConfig();
-        $this->render($this->getApp()->getRouteConfig(), [
+        $this->execute([
             'appId' => $config->getAppId(),
             'apiKey' => $config->getApiKey(),
             'indexName' => $config->getIndexName()

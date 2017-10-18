@@ -13,22 +13,23 @@ class View
 {
 
     protected $file;
-    private $variables;
+    private $params;
 
     public function __construct($controllerName, $actionName, $layout = 'default')
     {
-        $this->file = ROOT . 'view/' . strtolower(str_replace(Constants::CONTROLLER_NAMESPACE_ROOT, '',
-                $controllerName)) . '/' . $actionName . '.phtml';
+        $this->file = ROOT . 'view' . strtolower(str_replace('\\', '/',
+                str_replace(Constants::CONTROLLER_NAMESPACE_ROOT, '',
+                    $controllerName))) . '/' . $actionName . '.phtml';
     }
 
     /**
      * Set an array of variables.
      * Ex : with array("addMode" => true), $addMode will be available in Template
-     * @param array $variables
+     * @param array $params
      */
-    public function setVariables($variables)
+    public function setParams($params)
     {
-        $this->variables = $variables;
+        $this->params = $params;
     }
 
     public function output()
@@ -48,8 +49,8 @@ class View
         ob_start();
 
         // Extract variables to make them accessible in the template
-        if (is_array($this->variables)) {
-            extract($this->variables);
+        if (is_array($this->params)) {
+            extract($this->params);
         }
 
         include $this->file;

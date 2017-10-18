@@ -35,13 +35,12 @@ class App
     public function run()
     {
         // Get request uri
-        $uri = str_replace('/', '', $_SERVER['REQUEST_URI']);
+        $uri = substr($_SERVER['REQUEST_URI'], 1);
 
         $routes = $this->ymlParser->parse(file_get_contents(ROOT . 'config/routes.yml'));
 
-        list($controller, $action, $routeConfig) = $this->getRouteData($routes, $uri);
-
-        $controller = Constants::CONTROLLER_NAMESPACE_ROOT . ucfirst($controller);
+        list($module, $controller, $action, $routeConfig) = $this->getRouteData($routes, $uri);
+        $controller = Constants::CONTROLLER_NAMESPACE_ROOT . '\\'. ucfirst($module) . '\\'. ucfirst($controller);
 
         $this->controller = $controller;
         $this->action = $action;
@@ -49,6 +48,7 @@ class App
 
         // Execute controller matching route and action
         $controllerInstance = new $controller($this);
+        $action = $action . 'Action';
         $controllerInstance->$action();
     }
 
@@ -60,11 +60,13 @@ class App
     private function getRouteData($routes, $uri)
     {
         // Get controller and action from uri
+        $module = 'page';
         $controller = '';
         $action = 'index';
         $routeConfig = null;
         foreach ($routes as $routeKey => $routeValue) {
             if ($routeKey == $uri) {
+                $module = $routeValue['module'];
                 $controller = $routeValue['controller'];
                 if (isset($routeValue['action'])) {
                     $action = $routeValue['action'];
@@ -78,7 +80,7 @@ class App
         if ($controller == '') {
             $controller = 'NotFound';
         }
-        return array($controller, $action, $routeConfig);
+        return array($module, $controller, $action, $routeConfig);
     }
 
     /**

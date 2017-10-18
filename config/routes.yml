@@ -1,4 +1,5 @@
 'search' :
+  module: page
   controller: search
   config:
     styles:
@@ -7,6 +8,7 @@
       - css/search.css
     js:
       - https://cdn.jsdelivr.net/npm/instantsearch.js@2.2.0/dist/instantsearch.min.js
-'post/add' :
-  controller: post
-  action: add
+'api/1/apps' :
+  module: api
+  controller: apps
+  action: index
