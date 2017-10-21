@@ -140,10 +140,6 @@ form input[type=submit] {
         margin: 5px;
     }
 
-    #pagination-container {
-        float: right;
-    }
-
     .line {
         width: 90%;
     }

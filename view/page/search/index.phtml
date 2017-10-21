@@ -1,8 +1,6 @@
 <div class="line">
     <div id="search-box">
     </div>
-    <div id="pagination-container">
-    </div>
     <div id="sorter">
     </div>
 </div>
@@ -13,9 +11,20 @@
 </div>
 
 <div class="line">
+    <div id="pagination-container">
+    </div>
+</div>
+
+<div class="line">
     <div id="hits">
     </div>
 </div>
+
+<div class="line">
+    <div id="pagination-container-bottom">
+    </div>
+</div>
+
 
 <div class="line form">
     <fieldset id="deleteFieldset">
@@ -87,6 +96,15 @@
     search.addWidget(
         instantsearch.widgets.pagination({
             container: '#pagination-container',
+            maxPages: 20,
+            // default is to scroll to 'body', here we disable this behavior
+            scrollTo: false,
+            showFirstLast: false,
+        })
+    );
+    search.addWidget(
+        instantsearch.widgets.pagination({
+            container: '#pagination-container-bottom',
             maxPages: 20,
             // default is to scroll to 'body', here we disable this behavior
             scrollTo: false,
