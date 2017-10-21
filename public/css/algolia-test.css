@@ -71,18 +71,19 @@ form input[type=submit] {
     margin-top: 15px;
 }
 
-#sorter {
+#sorter, #pagination-container, #search-box {
     margin: 15px;
+}
+
+#sorter {
     float: right;
 }
 
 #pagination-container {
-    margin: 15px;
     float: left;
 }
 
 #search-box {
-    margin: 15px;
     float: left;
 }
 
@@ -97,7 +98,7 @@ form input[type=submit] {
     height: 30px;
     width: 100%;
     float: left;
-    margin-bottom: 2px;
+    margin-bottom: 10px;
     border-bottom: 1px #d4d8e3 solid;
 }
 
@@ -105,11 +106,16 @@ form input[type=submit] {
     float: left;
 }
 
+.cell.name {
+    width: 75%;
+}
+
 .cell.category {
     float: right;
     border: 1px grey solid;
     padding: 2px;
     border-radius: 2px;
+    font-size: 12px;
 
 }
 
@@ -127,7 +133,15 @@ form input[type=submit] {
 @media screen and (max-width: 640px) {
 
     body {
-        font-size: 28px;
+        font-size: 22px;
+    }
+
+    #sorter, #pagination-container, #search-box {
+        margin: 5px;
+    }
+
+    #pagination-container {
+        float: right;
     }
 
     .line {
@@ -135,6 +149,6 @@ form input[type=submit] {
     }
 
     .row {
-        height: 70px;
+        height: 60px;
     }
 }
