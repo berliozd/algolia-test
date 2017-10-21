@@ -24,13 +24,18 @@ class Layout extends View
             }
 
             $styles = '';
-            foreach ($routeConfig['styles'] as $style) {
-                $styles .= $this->formatStyle($style);
+            if (isset($routeConfig['styles'])) {
+                foreach ($routeConfig['styles'] as $style) {
+                    $styles .= $this->formatStyle($style);
+                }
+
             }
 
             $jss = '';
-            foreach ($routeConfig['js'] as $js) {
-                $jss .= $this->formatJs($js);
+            if (isset($routeConfig['js'])) {
+                foreach ($routeConfig['js'] as $js) {
+                    $jss .= $this->formatJs($js);
+                }
             }
         }
 

@@ -1,0 +1,140 @@
+body {
+    margin: 50px 0 0 0;
+    padding: 0;
+    width: 100%;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #aaa;
+    font-size: 18px;
+    box-sizing: border-box;
+}
+
+* {
+    box-sizing: border-box;
+    color: #606060;
+}
+
+fieldset {
+    border-color: #d4d8e3;
+}
+
+h1 {
+    color: #719e40;
+    letter-spacing: -3px;
+    font-family: 'Lato', sans-serif;
+    font-size: 100px;
+    font-weight: 200;
+    margin-bottom: 0;
+    text-align: center;
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    width: 100%;
+}
+
+form input[type=number], form input[type=text] {
+    width: 100%;
+    border-radius: 4px;
+    background: #fff;
+    padding: 5px;
+    vertical-align: middle;
+    box-shadow: 0 1px 1px 0 rgba(85, 95, 110, .2);
+    display: inline-block;
+    margin: 3px;
+    font-size: 1.2em;
+}
+
+form input[type=submit] {
+    border-radius: 4px;
+    box-shadow: 0 1px 1px 0 rgba(85, 95, 110, .2);
+    width: 170px;
+    height: 30px;
+    margin: 3px auto;
+    background: #f9f2f4;
+    display: block;
+    border: 1px solid #d4d8e3;
+    cursor: pointer;
+}
+
+.line {
+    clear: both;
+    width: 50%;
+    margin: 10px auto;
+}
+
+.line.form {
+    margin-top: 15px;
+}
+
+#sorter {
+    margin: 15px;
+    float: right;
+}
+
+#pagination-container {
+    margin: 15px;
+    float: left;
+}
+
+#search-box {
+    margin: 15px;
+    float: left;
+}
+
+.ais-refinement-list--item {
+    float: left;
+    margin: 5px;
+
+}
+
+.row {
+    cursor: pointer;
+    height: 30px;
+    width: 100%;
+    float: left;
+    margin-bottom: 2px;
+    border-bottom: 1px #d4d8e3 solid;
+}
+
+.cell {
+    float: left;
+}
+
+.cell.category {
+    float: right;
+    border: 1px grey solid;
+    padding: 2px;
+    border-radius: 2px;
+
+}
+
+#deleteFieldset.highlight {
+    background-color: #d4d8e3;
+    -webkit-transition: background-color 1000ms linear;
+    -ms-transition: background-color 1000ms linear;
+    transition: background-color 1000ms linear;
+}
+
+.message {
+    color: green;
+}
+
+@media screen and (max-width: 640px) {
+
+    body {
+        font-size: 28px;
+    }
+
+    .line {
+        width: 90%;
+    }
+
+    .row {
+        height: 70px;
+    }
+}

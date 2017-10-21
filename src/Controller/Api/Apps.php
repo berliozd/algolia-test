@@ -10,11 +10,13 @@ namespace AlgoliaTest\Controller\Api;
 
 
 use AlgoliaSearch\Client;
+use AlgoliaTest\Constants;
 use AlgoliaTest\Controller\ApiController;
 
 class Apps extends ApiController
 {
 
+    const ALGOLIA_APPS_PARAMS = ['name', 'image', 'link', 'category', 'rank'];
     private $algoliaClient;
     private $algoliaIndex;
 
@@ -29,24 +31,53 @@ class Apps extends ApiController
     public function indexAction()
     {
         $method = strtolower($_SERVER['REQUEST_METHOD']);
+        if (!method_exists($this, $method)) {
+            $this->notfound();
+            return;
+        }
         $this->$method();
     }
 
     public function delete()
     {
-        $this->execute($this->algoliaIndex->deleteObject(875750));
+        $idToDelete = $this->getParam('id');
+        if (is_numeric($idToDelete)) {
+            $response = $this->algoliaIndex->deleteObject($idToDelete);
+        } else {
+            $response = $this->getPreconditionErrorResponse('missing id of object to delete');
+        }
+        $this->execute($response);
+    }
+
+    /**
+     * @param $message
+     * @return array
+     */
+    private function getPreconditionErrorResponse($message)
+    {
+        $response = [
+            'error' => 'Precondition Failed',
+            'errorCode' => Constants::HTTP_PRECONDITION_FAILED_CODE,
+            'message' => $message
+        ];
+        return $response;
     }
 
     public function post()
     {
-        $data = [
-            "name" => "test didier",
-            "image" => "http://a3.mzstatic.com/us/r1000/090/Purple/v4/20/bd/a2/20bda225-6144-cb99-46ef-d0fc15fc456a/mzl.okdjewbf.175x175-75.jpg",
-            "link" => "http://itunes.apple.com/us/app/ibooks/id364709193?mt=8",
-            "category" => "Books",
-            "rank" => 1
-        ];
+        $data = $this->getParams();
 
-        $this->execute($this->algoliaIndex->addObject($data));
+        // Keep only a selection of params
+        $data = array_intersect_key($data, array_flip(self::ALGOLIA_APPS_PARAMS));
+
+        $errorCode = null;
+        if (count(self::ALGOLIA_APPS_PARAMS) != count($data)) {
+            $response = $this->getPreconditionErrorResponse('incorrect number of parameters received');
+            $errorCode = Constants::HTTP_KO_CODE;
+        } else {
+            $response = $this->algoliaIndex->addObject($data);
+        }
+
+        $this->execute($response, $errorCode);
     }
 }

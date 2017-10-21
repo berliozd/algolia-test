@@ -5,9 +5,13 @@
     styles:
       - https://cdn.jsdelivr.net/npm/instantsearch.js@2.2.0/dist/instantsearch.min.css
       - https://cdn.jsdelivr.net/npm/instantsearch.js@2.2.0/dist/instantsearch-theme-algolia.min.css
-      - css/search.css
+      - /css/normalize.css
+      - /css/algolia-test.css
     js:
       - https://cdn.jsdelivr.net/npm/instantsearch.js@2.2.0/dist/instantsearch.min.js
+      - https://code.jquery.com/jquery-3.2.1.min.js
+      - /js/algolia-test.js
+      - /js/jquery.scrollTo.min.js
 'api/1/apps' :
   module: api
   controller: apps

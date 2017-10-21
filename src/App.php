@@ -22,6 +22,7 @@ class App
     private $routeConfig;
     private $ymlParser;
     private $logger;
+    private $routeKey;
 
     function __construct()
     {
@@ -39,12 +40,13 @@ class App
 
         $routes = $this->ymlParser->parse(file_get_contents(ROOT . 'config/routes.yml'));
 
-        list($module, $controller, $action, $routeConfig) = $this->getRouteData($routes, $uri);
-        $controller = Constants::CONTROLLER_NAMESPACE_ROOT . '\\'. ucfirst($module) . '\\'. ucfirst($controller);
+        list($module, $routeKey, $controller, $action, $routeConfig) = $this->getRouteData($routes, $uri);
+        $controller = Constants::CONTROLLER_NAMESPACE_ROOT . '\\' . ucfirst($module) . '\\' . ucfirst($controller);
 
         $this->controller = $controller;
         $this->action = $action;
         $this->routeConfig = $routeConfig;
+        $this->routeKey = $routeKey;
 
         // Execute controller matching route and action
         $controllerInstance = new $controller($this);
@@ -65,7 +67,7 @@ class App
         $action = 'index';
         $routeConfig = null;
         foreach ($routes as $routeKey => $routeValue) {
-            if ($routeKey == $uri) {
+            if ($routeKey == $uri or preg_match('/' . str_replace('/', '\/', $routeKey) . '/', $uri)) {
                 $module = $routeValue['module'];
                 $controller = $routeValue['controller'];
                 if (isset($routeValue['action'])) {
@@ -80,7 +82,7 @@ class App
         if ($controller == '') {
             $controller = 'NotFound';
         }
-        return array($module, $controller, $action, $routeConfig);
+        return array($module, $routeKey, $controller, $action, $routeConfig);
     }
 
     /**
@@ -124,6 +126,14 @@ class App
     public function getLogger()
     {
         return $this->logger;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRouteKey()
+    {
+        return $this->routeKey;
     }
 
 

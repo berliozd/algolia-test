@@ -1,14 +1,47 @@
-
-<div id="search-box">
-    <!-- SearchBox widget will appear here -->
+<div class="line">
+    <div id="search-box">
+    </div>
+    <div id="pagination-container">
+    </div>
+    <div id="sorter">
+    </div>
 </div>
 
-
-<div id="refinement-list">
-    <!-- RefinementList widget will appear here -->
+<div class="line">
+    <div id="refinement-list">
+    </div>
 </div>
-<div id="hits">
-    <!-- Hits widget will appear here -->
+
+<div class="line">
+    <div id="hits">
+    </div>
+</div>
+
+<div class="line form">
+    <fieldset id="deleteFieldset">
+        <legend>DELETE</legend>
+        <form action="/api/1/apps" id="deleteForm">
+            <ul>
+                <li><input type="text" name="id" id="id-to-delete" value=""></li>
+                <li><input type="submit" value="Delete"/></li>
+            </ul>
+            <div class="message" id="delete-message"></div>
+        </form>
+    </fieldset>
+    <fieldset>
+        <legend>POST</legend>
+        <form action="/api/1/apps" id="postForm">
+            <ul>
+                <li><input type="text" name="name" id="name" value="test name" placeholder="name"></li>
+                <li><input type="text" name="category" id="category" value="Books" placeholder="category"></li>
+                <li><input type="text" name="link" id="link" value="http://test.link" placeholder="link"></li>
+                <li><input type="number" name="rank" id="rank" value="10" placeholder="rank"></li>
+                <li><input type="text" name="image" id="image" value="http://image.jpg" placeholder="image"></li>
+                <li><input type="submit" value="Post"/></li>
+            </ul>
+            <div class="message" id="post-message"></div>
+        </form>
+    </fieldset>
 </div>
 
 <script>
@@ -44,10 +77,33 @@
             container: '#hits',
             templates: {
                 empty: 'No results',
-                item: '<a href="delete?{{objectID}}">Delete</a>: {{{_highlightResult.name.value}}}'
+                item: '<div class="row delete-link" data-id="{{objectID}}">' +
+                '<div class="cell">{{{_highlightResult.name.value}}}</div>' +
+                '<div class="cell category">{{{_highlightResult.category.value}}}</div>' +
+                '</div>'
             }
         })
     );
+    search.addWidget(
+        instantsearch.widgets.pagination({
+            container: '#pagination-container',
+            maxPages: 20,
+            // default is to scroll to 'body', here we disable this behavior
+            scrollTo: false,
+            showFirstLast: false,
+        })
+    );
+
+    search.addWidget(
+        instantsearch.widgets.sortBySelector({
+                container: '#sorter',
+                indices: [
+                    {name: 'appStoreBis', label: 'Most relevant'},
+                    {name: 'replic1', label: 'by ascending name'},
+                    {name: 'replic2', label: 'by descending name'}
+                ]
+            }
+        ));
 
     search.start();
 </script>
