@@ -65,7 +65,7 @@ jQuery(function () {
         id = $(this).data().id;
         $("#id-to-delete").val(id);
         $('#delete-message').html('');
-        $(window).scrollTo($('#deleteForm'), 500);
+        $(window).scrollTo($('#deleteForm'), 200);
         $('#deleteFieldset').addClass('highlight');
         setTimeout(function(){$('#deleteFieldset').removeClass('highlight')}, 2000);
     });

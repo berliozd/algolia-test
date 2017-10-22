@@ -1,3 +1,8 @@
+* {
+    box-sizing: border-box;
+    color: #606060;
+}
+
 body {
     margin: 50px 0 0 0;
     padding: 0;
@@ -6,15 +11,6 @@ body {
     color: #aaa;
     font-size: 18px;
     box-sizing: border-box;
-}
-
-* {
-    box-sizing: border-box;
-    color: #606060;
-}
-
-fieldset {
-    border-color: #d4d8e3;
 }
 
 h1 {
@@ -27,6 +23,10 @@ h1 {
     text-align: center;
 }
 
+fieldset {
+    border-color: #d4d8e3;
+}
+
 ul {
     list-style: none;
     margin: 0;
@@ -37,114 +37,9 @@ li {
     width: 100%;
 }
 
-form input[type=number], form input[type=text] {
-    width: 100%;
-    border-radius: 4px;
-    background: #fff;
-    padding: 5px;
-    vertical-align: middle;
-    box-shadow: 0 1px 1px 0 rgba(85, 95, 110, .2);
-    display: inline-block;
-    margin: 3px;
-    font-size: 1.2em;
-}
-
-form input[type=submit] {
-    border-radius: 4px;
-    box-shadow: 0 1px 1px 0 rgba(85, 95, 110, .2);
-    width: 170px;
-    height: 30px;
-    margin: 3px auto;
-    background: #f9f2f4;
-    display: block;
-    border: 1px solid #d4d8e3;
-    cursor: pointer;
-}
-
-.line {
-    clear: both;
-    width: 50%;
-    margin: 10px auto;
-}
-
-.line.form {
-    margin-top: 15px;
-}
-
-#sorter, #pagination-container, #search-box {
-    margin: 15px;
-}
-
-#sorter {
-    float: right;
-}
-
-#pagination-container {
-    float: left;
-}
-
-#search-box {
-    float: left;
-}
-
-.ais-refinement-list--item {
-    float: left;
-    margin: 5px;
-
-}
-
-.row {
-    cursor: pointer;
-    height: 30px;
-    width: 100%;
-    float: left;
-    margin-bottom: 10px;
-    border-bottom: 1px #d4d8e3 solid;
-}
-
-.cell {
-    float: left;
-}
-
-.cell.name {
-    width: 75%;
-}
-
-.cell.category {
-    float: right;
-    border: 1px grey solid;
-    padding: 2px;
-    border-radius: 2px;
-    font-size: 12px;
-
-}
-
-#deleteFieldset.highlight {
-    background-color: #d4d8e3;
-    -webkit-transition: background-color 1000ms linear;
-    -ms-transition: background-color 1000ms linear;
-    transition: background-color 1000ms linear;
-}
-
-.message {
-    color: green;
-}
-
 @media screen and (max-width: 640px) {
 
     body {
         font-size: 22px;
-    }
-
-    #sorter, #pagination-container, #search-box {
-        margin: 5px;
-    }
-
-    .line {
-        width: 90%;
-    }
-
-    .row {
-        height: 60px;
     }
 }

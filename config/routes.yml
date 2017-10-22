@@ -5,8 +5,8 @@
     styles:
       - https://cdn.jsdelivr.net/npm/instantsearch.js@2.2.0/dist/instantsearch.min.css
       - https://cdn.jsdelivr.net/npm/instantsearch.js@2.2.0/dist/instantsearch-theme-algolia.min.css
-      - /css/normalize.css
       - /css/algolia-test.css
+      - /css/search.css
     js:
       - https://cdn.jsdelivr.net/npm/instantsearch.js@2.2.0/dist/instantsearch.min.js
       - https://code.jquery.com/jquery-3.2.1.min.js

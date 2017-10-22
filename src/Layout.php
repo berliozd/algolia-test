@@ -46,12 +46,12 @@ class Layout extends View
 
     private function formatStyle($style)
     {
-        return '<link href="' . $style . '" rel="stylesheet" type="text/css">';
+        return '<link href="' . $style . '" rel="stylesheet" type="text/css">' . chr(10);
 
     }
 
     private function formatJs($js)
     {
-        return '<script src="' . $js . '"></script>';
+        return '<script src="' . $js . '"></script>'. chr(10);
     }
 }
