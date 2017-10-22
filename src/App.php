@@ -30,7 +30,7 @@ class App
 
         // create a log channel
         $this->logger = new Logger('algoliatest');
-        $this->logger->pushHandler(new StreamHandler('logs/debug.log'));
+        $this->logger->pushHandler(new StreamHandler(ROOT . '/logs/debug.log'));
     }
 
     public function run()

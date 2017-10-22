@@ -24,7 +24,7 @@ form input[type=submit] {
 }
 
 .line {
-    //clear: both;
+    clear: both;
     width: 50%;
     margin: 10px auto;
 }
@@ -34,25 +34,29 @@ form input[type=submit] {
 }
 
 #sorter, #pagination-container, #search-box {
-    margin: 15px;
+    margin: 15px 0;
 }
 
 #sorter {
-    //float: right;
+    float: right;
 }
 
 #pagination-container {
-    //float: left;
+    float: left;
 }
 
 #search-box {
-    //float: left;
+    width: 100%;
+}
+
+.ais-search-box {
+    margin: 0 auto;
+    display: block;
 }
 
 .ais-refinement-list--item {
     float: left;
     margin: 5px;
-
 }
 
 .row {
