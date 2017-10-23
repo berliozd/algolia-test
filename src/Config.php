@@ -46,4 +46,9 @@ class Config
     {
         return $this->appId;
     }
+
+    public function getData()
+    {
+        return ['appId' => $this->appId, 'apiKey' => $this->apiKey, 'indexName' => $this->indexName];
+    }
 }

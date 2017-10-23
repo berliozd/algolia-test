@@ -29,9 +29,7 @@ class Search extends PageController
         $this->getApp()->getLogger()->info('search index');
         $config = $this->getApp()->getConfig();
         $this->execute([
-            'appId' => $config->getAppId(),
-            'apiKey' => $config->getApiKey(),
-            'indexName' => $config->getIndexName()
+            'appConfig' => json_encode($config->getData())
         ]);
     }
 }

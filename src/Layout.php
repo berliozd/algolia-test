@@ -31,16 +31,27 @@ class Layout extends View
 
             }
 
-            $jss = '';
+            $jss_head = '';
+            $jss_body = '';
             if (isset($routeConfig['js'])) {
                 foreach ($routeConfig['js'] as $js) {
-                    $jss .= $this->formatJs($js);
+                    if (strpos($js, 'HEAD') === 0) {
+                        $jss_head .= $this->formatJs(str_replace('HEAD:', '', $js));
+                    }
+                    if (strpos($js, 'BODY') === 0) {
+                        $jss_body .= $this->formatJs(str_replace('BODY:', '', $js));
+                    }
                 }
             }
         }
 
 
-        $this->setParams(['styles' => $styles, 'js' => $jss, 'content' => $viewContent]);
+        $this->setParams([
+            'styles' => $styles,
+            'js_head' => $jss_head,
+            'content' => $viewContent,
+            'js_body' => $jss_body,
+        ]);
         $this->file = ROOT . 'layout/' . $file . '.phtml';
     }
 
@@ -52,6 +63,6 @@ class Layout extends View
 
     private function formatJs($js)
     {
-        return '<script src="' . $js . '"></script>'. chr(10);
+        return '<script src="' . $js . '"></script>' . chr(10);
     }
 }

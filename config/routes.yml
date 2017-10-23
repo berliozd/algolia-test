@@ -8,10 +8,11 @@
       - /css/algolia-test.css
       - /css/search.css
     js:
-      - https://cdn.jsdelivr.net/npm/instantsearch.js@2.2.0/dist/instantsearch.min.js
-      - https://code.jquery.com/jquery-3.2.1.min.js
-      - /js/algolia-test.js
-      - /js/jquery.scrollTo.min.js
+      - HEAD:https://cdn.jsdelivr.net/npm/instantsearch.js@2.2.0/dist/instantsearch.min.js
+      - HEAD:https://code.jquery.com/jquery-3.2.1.min.js
+      - HEAD:/js/vue.js
+      - HEAD:/js/jquery.scrollTo.min.js
+      - BODY:/js/algolia-test.js
 'api/1/apps' :
   module: api
   controller: apps
