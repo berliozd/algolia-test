@@ -19,13 +19,13 @@ abstract class PageController extends AbstractController implements InterfaceCon
      */
     public function execute($params = null)
     {
-        $view = new View($this->getApp()->getController(), $this->getApp()->getAction());
+        $view = new View($this->getApp());
         if ($params) {
             $view->setParams($params);
         }
         $viewContent = $view->output();
 
-        $layout = new Layout($this->getApp()->getRouteConfig(), $viewContent);
+        $layout = new Layout($this->getApp(), $viewContent);
 
         echo $layout->output();
     }

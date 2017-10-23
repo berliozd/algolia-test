@@ -15,11 +15,16 @@ class View
     protected $file;
     private $params;
 
-    public function __construct($controllerName, $actionName, $layout = 'default')
+    /**
+     * View constructor.
+     * @param App $app
+     * @param string $layout
+     */
+    public function __construct($app, $layout = 'default')
     {
-        $this->file = ROOT . 'view' . strtolower(str_replace('\\', '/',
+        $this->file = $app->getRoot() . 'view' . strtolower(str_replace('\\', '/',
                 str_replace(Constants::CONTROLLER_NAMESPACE_ROOT, '',
-                    $controllerName))) . '/' . $actionName . '.phtml';
+                    $app->getController()))) . '/' . $app->getAction() . '.phtml';
     }
 
     /**

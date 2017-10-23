@@ -12,11 +12,19 @@ namespace AlgoliaTest;
 class Layout extends View
 {
 
-    public function __construct($routeConfig, $viewContent)
+    /**
+     * Layout constructor.
+     * @param App $app
+     * @param string $viewContent
+     */
+    public function __construct($app, $viewContent)
     {
         $file = 'default';
         $styles = '';
-        $jss = '';
+        $jss_head = '';
+        $jss_body = '';
+
+        $routeConfig = $app->getRouteConfig();
 
         if ($routeConfig) {
             if (isset($routeConfig['layout'])) {
@@ -28,11 +36,8 @@ class Layout extends View
                 foreach ($routeConfig['styles'] as $style) {
                     $styles .= $this->formatStyle($style);
                 }
-
             }
 
-            $jss_head = '';
-            $jss_body = '';
             if (isset($routeConfig['js'])) {
                 foreach ($routeConfig['js'] as $js) {
                     if (strpos($js, 'HEAD') === 0) {
@@ -52,7 +57,7 @@ class Layout extends View
             'content' => $viewContent,
             'js_body' => $jss_body,
         ]);
-        $this->file = ROOT . 'layout/' . $file . '.phtml';
+        $this->file = $app->getRoot() . 'layout/' . $file . '.phtml';
     }
 
     private function formatStyle($style)

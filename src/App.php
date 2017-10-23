@@ -23,14 +23,16 @@ class App
     private $ymlParser;
     private $logger;
     private $routeKey;
+    private $root;
 
     function __construct()
     {
         $this->ymlParser = new Parser();
+        $this->root = get_root();
 
         // create a log channel
         $this->logger = new Logger('algoliatest');
-        $this->logger->pushHandler(new StreamHandler(ROOT . '/logs/debug.log'));
+        $this->logger->pushHandler(new StreamHandler($this->root . 'logs/debug.log'));
     }
 
     public function run()
@@ -38,7 +40,7 @@ class App
         // Get request uri
         $uri = substr($_SERVER['REQUEST_URI'], 1);
 
-        $routes = $this->ymlParser->parse(file_get_contents(ROOT . 'config/routes.yml'));
+        $routes = $this->ymlParser->parse(file_get_contents($this->root . 'config/routes.yml'));
 
         list($module, $routeKey, $controller, $action, $routeConfig) = $this->getRouteData($routes, $uri);
         $controller = Constants::CONTROLLER_NAMESPACE_ROOT . '\\' . ucfirst($module) . '\\' . ucfirst($controller);
@@ -107,7 +109,7 @@ class App
     public function getConfig()
     {
         if (!$this->config) {
-            $this->config = new Config($this->ymlParser->parse(file_get_contents(ROOT . 'config/config.yml')));
+            $this->config = new Config($this->ymlParser->parse(file_get_contents($this->root . 'config/config.yml')));
         }
         return $this->config;
     }
@@ -136,5 +138,11 @@ class App
         return $this->routeKey;
     }
 
-
+    /**
+     * @return string
+     */
+    public function getRoot()
+    {
+        return $this->root;
+    }
 }

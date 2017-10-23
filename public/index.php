@@ -5,8 +5,11 @@ if (preg_match('/\.(?:png|jpg|jpeg|gif|html|css|js|ico)$/', $_SERVER["REQUEST_UR
     return false;
 }
 
-const ROOT = '../';
+function get_root()
+{
+    return is_dir('vendor') ? '' : '../';
+}
 
-require ROOT . 'vendor/autoload.php';
+require get_root() . 'vendor/autoload.php';
 
-require ROOT . 'src/bootstrap.php';
+require get_root() . 'src/bootstrap.php';
