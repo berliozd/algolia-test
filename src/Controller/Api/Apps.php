@@ -66,7 +66,6 @@ class Apps extends ApiController
     public function post()
     {
         $data = $this->getParams();
-
         // Keep only a selection of params
         $data = array_intersect_key($data, array_flip(self::ALGOLIA_APPS_PARAMS));
 

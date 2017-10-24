@@ -22,7 +22,7 @@
     </div>
 
     <div class="line">
-        <div id="hits" v-on:click="deleteFormInit($event)">
+        <div id="hits" v-on:click.prevent="deleteFormInit($event)">
         </div>
     </div>
 
@@ -35,26 +35,27 @@
     <div class="line form">
         <fieldset id="deleteFieldset">
             <legend>Delete a record by its Id</legend>
-            <form action="/api/1/apps" id="deleteForm">
+            <form>
                 <ul>
-                    <li><input type="text" name="id" id="id-to-delete" value=""></li>
-                    <li><input type="submit" value="Delete" v-on:click="deleteFormSubmit($event)"/></li>
+                    <li><input type="text" name="id" id="id-to-delete" v-bind:value="idToDelete"></li>
+                    <li><input type="submit" value="Delete" v-on:click.prevent="deleteFormSubmit"/></li>
                 </ul>
-                <div class="message" id="delete-message"></div>
+                <div class="message" id="delete-message">{{deleteMessage}}</div>
             </form>
         </fieldset>
         <fieldset>
             <legend>Add a new record</legend>
-            <form action="/api/1/apps" id="postForm">
+            <form>
                 <ul>
-                    <li><input type="text" name="name" id="name" value="test name" placeholder="name"></li>
-                    <li><input type="text" name="category" id="category" value="Books" placeholder="category"></li>
-                    <li><input type="text" name="link" id="link" value="http://test.link" placeholder="link"></li>
-                    <li><input type="number" name="rank" id="rank" value="10" placeholder="rank"></li>
-                    <li><input type="text" name="image" id="image" value="http://image.jpg" placeholder="image"></li>
-                    <li><input type="submit" value="Post" v-on:click="postFormSubmit($event)"/></li>
+                    <li><input type="text" name="name" id="name" v-bind:value="postName" placeholder="name"></li>
+                    <li><input type="text" name="category" id="category" v-bind:value="postCategory"
+                               placeholder="category"></li>
+                    <li><input type="text" name="link" id="link" v-bind:value="postLink" placeholder="link"></li>
+                    <li><input type="number" name="rank" id="rank" v-bind:value="postRank" placeholder="rank"></li>
+                    <li><input type="text" name="image" id="image" v-bind:value="postImage" placeholder="image"></li>
+                    <li><input type="submit" value="Post" v-on:click.prevent="postFormSubmit($event)"/></li>
                 </ul>
-                <div class="message" id="post-message"></div>
+                <div class="message" id="post-message">{{postMessage}}</div>
             </form>
         </fieldset>
     </div>

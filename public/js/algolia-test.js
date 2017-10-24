@@ -1,72 +1,56 @@
+Vue.http.options.emulateJSON = true;
+
 var app = new Vue({
     el: '#app',
+    data: {
+        apiUrl : '/api/1/apps',
+        idToDelete: '',
+        deleteMessage: '',
+        postMessage: '',
+        postName : 'test name',
+        postCategory: 'Books',
+        postLink: 'http://testlink.com',
+        postRank: '10',
+        postImage: 'http://test/image.jpg'
+    },
     methods: {
 
         deleteFormInit: function (event) {
-            if (event) event.preventDefault();
 
             var id = $(event.target).closest('.delete-link').attr("data-id");
-            $("#id-to-delete").val(id);
 
-            $("#delete-message").html("");
+            this.idToDelete = id;
+            this.deleteMessage = "";
 
-            $(window).scrollTo($("#deleteForm"), 200);
-
+            $(window).scrollTo($("#deleteFieldset"), 200);
             $('#deleteFieldset').addClass("highlight");
             setTimeout(function () {
                 $("#deleteFieldset").removeClass("highlight");
             }, 2000);
         },
 
-        deleteFormSubmit: function (event) {
-            if (event) event.preventDefault();
-
-            var $form = $(event.target).closest("form"),
-                id = $form.find("input[name='id']").val(),
-                apiUrl = $form.attr("action");
-
-            var posting = $.ajax({
-                type: "DELETE",
-                url: apiUrl + '/' + id
-            });
-
-            posting.fail(function (data) {
-                $("#delete-message").html("Error : " + data.responseJSON.error + "- code : " + data.responseJSON.errorCode);
-            });
-
-            posting.done(function (data) {
-                $("#delete-message").html("Object " + data.objectID + " deleted!");
+        deleteFormSubmit: function () {
+            this.$http.delete(this.apiUrl + "/" + this.idToDelete).then(function (data) {
+                this.deleteMessage = "Object " + data.body.objectID + " deleted!";
+            }, function (data) {
+                this.deleteMessage = "Error : " + data.statusText + "- code : " + data.status;
             });
         },
 
-        postFormSubmit: function (event) {
-            if (event) event.preventDefault();
+        postFormSubmit: function () {
+            var postData = {
+                name: this.postName,
+                category: this.postCategory,
+                rank: this.postRank,
+                link: this.postLink,
+                image: this.postImage
+            };
 
-            var $form = $(event.target).closest("form"),
-                name = $form.find("input[name='name']").val(),
-                image = $form.find("input[name='image']").val(),
-                link = $form.find("input[name='link']").val(),
-                category = $form.find("input[name='category']").val(),
-                rank = $form.find("input[name='rank']").val(),
-                apiUrl = $form.attr("action");
-
-            var posting = $.post(apiUrl, {
-                name: name,
-                image: image,
-                link: link,
-                category: category,
-                rank: rank
+            this.$http.post(this.apiUrl, postData).then(function (data) {
+                this.postMessage = "Object " + data.body.objectID + " added!";
+            }, function (data) {
+                this.postMessage = "Error : " + data.statusText + "- code : " + data.status;
             });
-
-
-            posting.fail(function (data) {
-                $("#post-message").html("Error : " + data.responseJSON.error + "- code : " + data.responseJSON.errorCode);
-            });
-
-            posting.done(function (data) {
-                $("#post-message").html("Object " + data.objectID + " added!");
-            });
-
         }
     }
 });

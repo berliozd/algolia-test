@@ -5,13 +5,13 @@
     styles:
       - https://cdn.jsdelivr.net/npm/instantsearch.js@2.2.0/dist/instantsearch.min.css
       - https://cdn.jsdelivr.net/npm/instantsearch.js@2.2.0/dist/instantsearch-theme-algolia.min.css
-      - /css/algolia-test.css
       - /css/search.css
     js:
       - HEAD:https://cdn.jsdelivr.net/npm/instantsearch.js@2.2.0/dist/instantsearch.min.js
       - HEAD:https://code.jquery.com/jquery-3.2.1.min.js
-      - HEAD:/js/vue.js
-      - HEAD:/js/jquery.scrollTo.min.js
+      - HEAD://cdn.jsdelivr.net/npm/jquery.scrollto@2.1.2/jquery.scrollTo.min.js
+      - HEAD:https://unpkg.com/vue
+      - HEAD:https://cdn.jsdelivr.net/npm/vue-resource@1.3.4
       - BODY:/js/algolia-test.js
 'api/1/apps' :
   module: api
