@@ -22,7 +22,7 @@ abstract class ApiController extends AbstractController implements InterfaceCont
 
     public function execute($params = null, $code = Constants::HTTP_OK_CODE)
     {
-        header("Content-type: application/json; charset=utf-8", true, $code);
+        header('Content-type: application/json; charset=utf-8', true, $code);
         echo json_encode($params);
     }
 }

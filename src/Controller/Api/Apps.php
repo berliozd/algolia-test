@@ -20,6 +20,10 @@ class Apps extends ApiController
     private $algoliaClient;
     private $algoliaIndex;
 
+    /**
+     * Apps constructor.
+     * @param \AlgoliaTest\App $app
+     */
     function __construct($app)
     {
         parent::__construct($app);
@@ -28,6 +32,9 @@ class Apps extends ApiController
 
     }
 
+    /**
+     * Index action : entry point for executing correct method
+     */
     public function indexAction()
     {
         $method = strtolower($_SERVER['REQUEST_METHOD']);
@@ -38,6 +45,9 @@ class Apps extends ApiController
         $this->$method();
     }
 
+    /**
+     * Delete method
+     */
     public function delete()
     {
         $idToDelete = $this->getParam('id');
@@ -50,6 +60,7 @@ class Apps extends ApiController
     }
 
     /**
+     * Retrieve precondition error response
      * @param $message
      * @return array
      */
@@ -63,6 +74,9 @@ class Apps extends ApiController
         return $response;
     }
 
+    /**
+     * Post method
+     */
     public function post()
     {
         $data = $this->getParams();

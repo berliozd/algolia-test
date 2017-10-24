@@ -28,8 +28,7 @@ class View
     }
 
     /**
-     * Set an array of variables.
-     * Ex : with array("addMode" => true), $addMode will be available in Template
+     * Set an array of params.
      * @param array $params
      */
     public function setParams($params)

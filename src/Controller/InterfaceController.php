@@ -8,10 +8,14 @@
 
 namespace AlgoliaTest\Controller;
 
+use AlgoliaTest\Constants;
+
 interface InterfaceController
 {
     /**
      * @param null $params
+     * @param int $code
+     * @return
      */
-    public function execute($params = null);
+    public function execute($params = null, $code = Constants::HTTP_OK_CODE);
 }

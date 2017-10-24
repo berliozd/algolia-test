@@ -25,6 +25,9 @@ class App
     private $routeKey;
     private $root;
 
+    /**
+     * App constructor.
+     */
     function __construct()
     {
         $this->ymlParser = new Parser();
@@ -35,28 +38,39 @@ class App
         $this->logger->pushHandler(new StreamHandler($this->root . 'logs/debug.log'));
     }
 
+    /**
+     * Main app run method
+     */
     public function run()
     {
-        // Get request uri
-        $uri = substr($_SERVER['REQUEST_URI'], 1);
+        try {
+            // Get request uri
+            $uri = substr($_SERVER['REQUEST_URI'], 1);
 
-        $routes = $this->ymlParser->parse(file_get_contents($this->root . 'config/routes.yml'));
+            // Read routes config file
+            $routes = $this->ymlParser->parse(file_get_contents($this->root . 'config/routes.yml'));
 
-        list($module, $routeKey, $controller, $action, $routeConfig) = $this->getRouteData($routes, $uri);
-        $controller = Constants::CONTROLLER_NAMESPACE_ROOT . '\\' . ucfirst($module) . '\\' . ucfirst($controller);
+            // Retrieve route information
+            list($module, $routeKey, $controller, $action, $routeConfig) = $this->getRouteData($routes, $uri);
+            $controller = Constants::CONTROLLER_NAMESPACE_ROOT . '\\' . ucfirst($module) . '\\' . ucfirst($controller);
+            $this->controller = $controller;
+            $this->action = $action;
+            $this->routeConfig = $routeConfig;
+            $this->routeKey = $routeKey;
 
-        $this->controller = $controller;
-        $this->action = $action;
-        $this->routeConfig = $routeConfig;
-        $this->routeKey = $routeKey;
+            // Execute controller matching route and action
+            $controllerInstance = new $this->controller($this);
+            $action = $action . 'Action';
+            $controllerInstance->$action();
 
-        // Execute controller matching route and action
-        $controllerInstance = new $controller($this);
-        $action = $action . 'Action';
-        $controllerInstance->$action();
+        } catch (\Exception $e) {
+            $this->logger->error('App run error . ' . $e->getMessage());
+            include $this->root . 'error/error.php';
+        }
     }
 
     /**
+     * Retrieve route data from uri
      * @param $routes
      * @param $uri
      * @return array
@@ -68,8 +82,11 @@ class App
         $controller = '';
         $action = 'index';
         $routeConfig = null;
+        $routeKey = '';
         foreach ($routes as $routeKey => $routeValue) {
-            if ($routeKey == $uri or preg_match('/' . str_replace('/', '\/', $routeKey) . '/', $uri)) {
+            if ($routeKey == $uri
+                or preg_match('/' . str_replace('/', '\/', $routeKey) . '/', $uri)
+            ) {
                 $module = $routeValue['module'];
                 $controller = $routeValue['controller'];
                 if (isset($routeValue['action'])) {

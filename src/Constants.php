@@ -17,6 +17,5 @@ class Constants
     const HTTP_PRECONDITION_FAILED_CODE = 412;
     const HTTP_KO_CODE = 500;
 
-
     const CONTROLLER_NAMESPACE_ROOT = 'AlgoliaTest\Controller';
 }

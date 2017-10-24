@@ -9,6 +9,7 @@
 
 namespace AlgoliaTest\Controller\Page;
 
+use AlgoliaTest\Constants;
 use AlgoliaTest\Controller\PageController;
 
 
@@ -23,6 +24,6 @@ class NotFound extends PageController
     public function indexAction()
     {
         $this->getApp()->getLogger()->info('notfound index');
-        $this->execute();
+        $this->execute(null, Constants::HTTP_NOT_FOUND_CODE);
     }
 }
