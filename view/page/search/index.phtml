@@ -37,7 +37,7 @@
             <legend>Delete a record by its Id</legend>
             <form>
                 <ul>
-                    <li><input type="text" name="id" id="id-to-delete" v-bind:value="idToDelete"></li>
+                    <li><input type="text" name="id" id="id-to-delete" v-model:value="idToDelete"></li>
                     <li><input type="submit" value="Delete" v-on:click.prevent="deleteFormSubmit"/></li>
                 </ul>
                 <div class="message" id="delete-message">{{deleteMessage}}</div>
@@ -47,12 +47,12 @@
             <legend>Add a new record</legend>
             <form>
                 <ul>
-                    <li><input type="text" name="name" id="name" v-bind:value="postName" placeholder="name"></li>
-                    <li><input type="text" name="category" id="category" v-bind:value="postCategory"
+                    <li><input type="text" name="name" id="name" v-model:value="postName" placeholder="name"></li>
+                    <li><input type="text" name="category" id="category" v-model:value="postCategory"
                                placeholder="category"></li>
-                    <li><input type="text" name="link" id="link" v-bind:value="postLink" placeholder="link"></li>
-                    <li><input type="number" name="rank" id="rank" v-bind:value="postRank" placeholder="rank"></li>
-                    <li><input type="text" name="image" id="image" v-bind:value="postImage" placeholder="image"></li>
+                    <li><input type="text" name="link" id="link" v-model:value="postLink" placeholder="link"></li>
+                    <li><input type="number" name="rank" id="rank" v-model:value="postRank" placeholder="rank"></li>
+                    <li><input type="text" name="image" id="image" v-model:value="postImage" placeholder="image"></li>
                     <li><input type="submit" value="Post" v-on:click.prevent="postFormSubmit($event)"/></li>
                 </ul>
                 <div class="message" id="post-message">{{postMessage}}</div>
