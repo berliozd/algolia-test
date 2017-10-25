@@ -68,8 +68,8 @@ var options = {
     appId: appConfig.appId,
     apiKey: appConfig.apiKey,
     indexName: appConfig.indexName,
-    indexSortByNameAsc: appConfig.indexSortByNameAsc,
-    indexSortByNameDesc: appConfig.indexSortByNameDesc,
+    indexFirstReplica: appConfig.indexFirstReplica,
+    indexSecondReplica: appConfig.indexSecondReplica,
     urlSync: true
 };
 
@@ -128,8 +128,8 @@ search.addWidget(
             container: '#sorter',
             indices: [
                 {name: options.indexName, label: 'Most relevant'},
-                {name: options.indexSortByNameAsc, label: 'by ascending name'},
-                {name: options.indexSortByNameDesc, label: 'by descending name'}
+                {name: options.indexFirstReplica, label: 'by ascending rank'},
+                {name: options.indexSecondReplica, label: 'by descending rank'}
             ]
         }
     ));

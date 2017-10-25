@@ -1,5 +1,5 @@
 appId: '145VSOMR9Y'
 apiKey: '47f3053a4b4048c6baf479dbd0e8fb41'
 indexName: 'appStore'
-indexSortByNameAsc: 'appStoreByNameAsc'
-indexSortByNameDesc: 'appStoreByNameDesc'
+indexFirstReplica: 'appStoreByRankAsc'
+indexSecondReplica: 'appStoreByRankDesc'

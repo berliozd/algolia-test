@@ -17,8 +17,8 @@ class Config
     private $appId;
     private $apiKey;
     private $indexName;
-    private $indexSortByNameDesc;
-    private $indexSortByNameAsc;
+    private $indexFirstReplica;
+    private $indexSecondReplica;
 
     function __construct($data)
     {
