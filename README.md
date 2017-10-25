@@ -1,20 +1,30 @@
-# Installation 
+# Local Installation 
 
 * Run docker container : 
 
+```
 $ docker-compose up
-
+```
 
 * Get container id using :
-
+```
 $ docker container ls  
+```
 
+* Launch sh inside container
+```
+$ docker exec -it <use container id retrieve from previous command> sh
+```
 
-* Execute sh command in container
+* Run composer inside container to install vendors :
+```
+$ composer install
+```
 
-$ docker exec -it <container id> sh
+* Test :
 
+Go to : http://localhost:8080
 
-* Run :
+# Online Demo
 
-composer install
+Online demo is available here : https://murmuring-bastion-63000.herokuapp.com/
