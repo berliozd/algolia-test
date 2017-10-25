@@ -9,18 +9,22 @@
 namespace AlgoliaTest;
 
 
+use ReflectionClass;
+
 class Config
 {
 
     private $appId;
     private $apiKey;
     private $indexName;
+    private $indexSortByNameDesc;
+    private $indexSortByNameAsc;
 
     function __construct($data)
     {
-        $this->appId = $data['appId'];
-        $this->apiKey = $data['apiKey'];
-        $this->indexName = $data['indexName'];
+        foreach ($data as $fieldKey => $fieldValue) {
+            $this->$fieldKey = $fieldValue;
+        }
     }
 
     /**
@@ -47,8 +51,20 @@ class Config
         return $this->appId;
     }
 
+    /**
+     * @return mixed
+     */
     public function getData()
     {
-        return ['appId' => $this->appId, 'apiKey' => $this->apiKey, 'indexName' => $this->indexName];
+        $data = [];
+        $reflect = new ReflectionClass($this);
+        $props = $reflect->getProperties(\ReflectionProperty::IS_PRIVATE);
+        foreach ($props as $prop) {
+            $propName = $prop->getName();
+            $data[$prop->getName()] = $this->$propName;
+        }
+
+        /** @var array $data */
+        return $data;
     }
 }

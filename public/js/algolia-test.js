@@ -59,6 +59,8 @@ var options = {
     appId: appConfig.appId,
     apiKey: appConfig.apiKey,
     indexName: appConfig.indexName,
+    indexSortByNameAsc: appConfig.indexSortByNameAsc,
+    indexSortByNameDesc: appConfig.indexSortByNameDesc,
     urlSync: true
 };
 
@@ -116,9 +118,9 @@ search.addWidget(
     instantsearch.widgets.sortBySelector({
             container: '#sorter',
             indices: [
-                {name: appConfig.indexName, label: 'Most relevant'},
-                {name: 'replic1', label: 'by ascending name'},
-                {name: 'replic2', label: 'by descending name'}
+                {name: options.indexName, label: 'Most relevant'},
+                {name: options.indexSortByNameAsc, label: 'by ascending name'},
+                {name: options.indexSortByNameDesc, label: 'by descending name'}
             ]
         }
     ));
