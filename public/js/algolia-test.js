@@ -3,11 +3,11 @@ Vue.http.options.emulateJSON = true;
 var app = new Vue({
     el: '#app',
     data: {
-        apiUrl : '/api/1/apps',
+        apiUrl: '/api/1/apps',
         idToDelete: '',
         deleteMessage: '',
         postMessage: '',
-        postName : 'test name',
+        postName: 'test name',
         postCategory: 'Books',
         postLink: 'http://testlink.com',
         postRank: '10',
@@ -30,14 +30,23 @@ var app = new Vue({
         },
 
         deleteFormSubmit: function () {
-            this.$http.delete(this.apiUrl + "/" + this.idToDelete).then(function (data) {
-                this.deleteMessage = "Object " + data.body.objectID + " deleted!";
-            }, function (data) {
-                this.deleteMessage = "Error : " + data.statusText + "- code : " + data.status;
-            });
+            if (this.idToDelete) {
+                this.$http.delete(this.apiUrl + "/" + this.idToDelete).then(function (data) {
+                    this.deleteMessage = "Object " + data.body.objectID + " deleted!";
+                }, function (data) {
+                    this.deleteMessage = "Error : " + data.statusText + "- code : " + data.status;
+                });
+            } else {
+                this.deleteMessage = "Please select an item to delete in the list.";
+            }
         },
 
         postFormSubmit: function () {
+
+            if (!this.postName || !this.postCategory) {
+                this.postMessage = "Please specify values for name and category.";
+                return;
+            }
             var postData = {
                 name: this.postName,
                 category: this.postCategory,
